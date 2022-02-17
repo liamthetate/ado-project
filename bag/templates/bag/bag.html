@@ -33,6 +33,7 @@
                             <th scope="col">Subtotal</th>
                         </tr>
                     </thead>
+
                     {% for item in bag_items %}
                         <tr>
                             <td class="p-3 w-25">
@@ -47,13 +48,46 @@
                                 <p class="my-0">{{ item.product.price }}</p>
                             </td>
                             <td class="py-3 w-25">
-                                <p class="my-0">{{ item.quantity }}</p>
+                                <form class="form update-form" method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="input-group input-group-{{ item.item_.id }}">
+                                            <div class="input-group-prepend">
+                                                <button class="decrement-qty btn btn-sml btn-black rounded-0 decrement-qty_{{ item.item_.id }}" 
+                                                    data-item_id="{{ item.item_.id }}">
+                                                    <span>
+                                                        <i class="fas fa-minus fa-sm"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <input class="form-control form-control-sm qty_input id_qty_{{ item.item_.id }}" type="number"
+                                                name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                                data-item_id="{{ item.item_.id }}">
+                                            <div class="input-group-append">
+                                                <button class="increment-qty btn btn-sml btn-black rounded-0 increment-qty_{{ product.id }}"
+                                                    data-item_id="{{ item.item_.id }}">
+                                                    <span>
+                                                        <i class="fas fa-plus fa-sm"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            {% if item.product.has_sizes %}
+                                                <input type="hidden" name="product_size" value="{{ item.size }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </form>
+                                <a class="update-link text-info"><small>Update</small></a>
+                                <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-size="{{ item.size }}"><small>Remove</small></a>
+                                    
                             </td>
                             <td class="py-3">
                                 <p class="my-0">{{ item.product.price }}</p>
                             </td>
                         </tr>
+
                     {% endfor %}
+
                     <tr>
                         <td colspan="5" class="pt-5 text-right">
                             <h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
@@ -63,7 +97,7 @@
                                 <p class="mb-1 text-danger">
                                     You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!
                                 </p>
-                            <!-- put an endif here -->
+                            
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +118,7 @@
                     </tr>
                 </table>
             </div>
-        {% else %}
+                            {% else %}
             <p class="lead mb-5">Your bag is empty because yr poor</p>
             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
                 <span class="icon">
@@ -99,3 +133,4 @@
 </div>
 
 {% endblock %}
+
