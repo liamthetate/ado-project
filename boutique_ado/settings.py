@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'checkout',
 
     #other
-    'crispy-forms',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request', #required by allauth
                 'django.contrib.auth.context_processors.auth', 
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'bag.contexts.bag_contents', #'bag' is app/folder. 'contexts' is the py file. 'bag_contents' is the name of the function.                        
             ],
             'builtins': [

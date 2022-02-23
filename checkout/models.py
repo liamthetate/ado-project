@@ -34,7 +34,6 @@ class Order(models.Model):
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
-
     def save(self, *args, **kwargs):
         """ overide and set order number if not one already """
         if not self.order_number:
