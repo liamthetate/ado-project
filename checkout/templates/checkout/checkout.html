@@ -25,7 +25,8 @@
                 <hr>
             </div>
         </div>
-    </div>
+    </div> <!-- problem div? -->
+    
 
     <div class="row">
         <div class="col-12 col-lg-6 order-lg-last mb-5">
@@ -109,6 +110,7 @@
                         <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                         <div class="mb-3" id="card-element"></div>
                         <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
 
                     <div class="submit-button text-right mt-5 mb-2">                    
@@ -135,6 +137,13 @@
             </form>
         </div>
     </div>
+</div>
+<div id="loading-overlay">
+    <h1 class="loading-spinner">
+        <span class="icon">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+        </span>
+    </h1>
 </div>
 
 
